@@ -13,6 +13,14 @@ router.get("/", async (req, res, next) => {
   });
 });
 
+
+router.get("/test", async (req, res, next) => {
+  res.json({
+    res: "testPath",
+    ip: req.clientIp,
+  });
+});
+
 router.get("/visitors", async (req, res, next) => {
   let visitor;
   try {
