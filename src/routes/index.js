@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const monk = require("monk");
+const geoip = require('geoip-lite');
 
 const db = monk(process.env.MONGODB_URI);
 const visitors = db.get("visitors");
@@ -30,6 +31,11 @@ router.post("/visitors", async (req, res, next) => {
   } catch (err) {
     next(err);
     return;
+  }
+
+  var geo = geoip.lookup('207.97.227.233');
+  if (geo != null) {
+    visitor['geo'] = geo;
   }
 
   res.json({
