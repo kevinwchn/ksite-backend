@@ -13,17 +13,7 @@ router.get("/", async (req, res, next) => {
   });
 });
 
-
-router.get("/test", async (req, res, next) => {
-  console.log(`Test log`);
-  res.json({
-    res: "testPath",
-    ip: req.clientIp,
-  });
-});
-
-router.get("/visitors", async (req, res, next) => {
-  console.log(`Visitor log`);
+router.post("/visitors", async (req, res, next) => {
   let visitor;
   try {
     visitor = await visitors.findOneAndUpdate(
