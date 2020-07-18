@@ -33,7 +33,7 @@ router.post("/visitors", async (req, res, next) => {
     return;
   }
 
-  var geo = geoip.lookup('207.97.227.233');
+  var geo = geoip.lookup(ip);
   if (geo != null) {
     visitor['geo'] = geo;
   }
