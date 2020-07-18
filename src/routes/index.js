@@ -33,10 +33,15 @@ router.post("/visitors", async (req, res, next) => {
     return;
   }
 
-  var geo = geoip.lookup(ip);
-  if (geo != null) {
-    visitor['geo'] = geo;
+  try {
+    const geo = geoip.lookup(req.clientIp);
+    if (geo != null) {
+      visitor['geo'] = geo;
+    }
+  } catch (err) {
+    console.log(err);
   }
+  
 
   res.json({
     visitor: visitor,
