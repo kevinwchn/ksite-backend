@@ -14,7 +14,7 @@ router.get("/conan/:episodeId", (req, res, next) => {
   res.json({
     episode: episodeId,
     referenceId: referenceId,
-    classicUrl: `https://classic.ifvod.tv/play?${referenceId}`,
+    classicUrl: `https://classic.ifvod.tv/play?id=${referenceId}`,
     newUrl: `https://www.ifvod.tv/play?id=${referenceId}`,
   });
 });
