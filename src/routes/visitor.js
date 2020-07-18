@@ -1,7 +1,7 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 const monk = require("monk");
-const geoip = require('geoip-lite');
+const geoip = require("geoip-lite");
 
 const db = monk(process.env.MONGODB_URI);
 const visitors = db.get("visitors");
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
   });
 });
 
-router.post("/visitors", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   let visitor;
   try {
     visitor = await visitors.findOneAndUpdate(
@@ -36,16 +36,15 @@ router.post("/visitors", async (req, res, next) => {
   try {
     const geo = geoip.lookup(req.clientIp);
     if (geo != null) {
-      visitor['geo'] = geo;
+      visitor["geo"] = geo;
     }
   } catch (err) {
     console.log(err);
   }
-  
 
   res.json({
     visitor: visitor,
   });
 });
 
-module.exports = router
+module.exports = router;

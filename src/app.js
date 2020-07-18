@@ -8,7 +8,8 @@ const requestIp = require("request-ip");
 require("dotenv").config();
 
 const app = express();
-const routes = require('./routes')
+const visitor = require('./routes/visitor');
+const episode = require('./routes/episodes');
 
 app.use(helmet());
 app.use(morgan("tiny"));
@@ -17,7 +18,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(requestIp.mw());
 
-app.use('/', routes);
+app.use('/visitors', visitor);
+app.use('/episodes', episode);
 
 app.use((err, req, res, next) => {
   if (err.status) {
