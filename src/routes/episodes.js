@@ -8,7 +8,7 @@ const watchHistory = db.get("watch-history");
 router.get("/conan", async (req, res, next) => {
   const result = await watchHistory.find(
     { episode: "conan" },
-    { sort: { _id: -1 }, limit: 5 }
+    { sort: { _id: -1 }, limit: 100 }
   );
   res.json({
     history: result.map((x) => {
